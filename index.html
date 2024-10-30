@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Good Bye</title>
+</head>
+<body>
+    <div class="container">
+        <div id="text"><b>Text</b></div>
+        <div id="option-buttons" class="btn-grid">
+            <button class="btn">Option 1</button>
+            <button class="btn">Option 2</button>
+        </div>
+    </div>
+    <style>
+        *, *::before, *::after{
+    box-sizing: border-box;
+    font-family: arial;
+}
+
+body{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: black; 
+}
+
+.container{
+    font-size: 25px;
+    text-align: center;
+    width: 800px;
+    max-width: 80%;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 50px lightblue;
+}
+
+.btn-grid{
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn{
+    font-size: 20px;
+    background-color: white;
+    border-radius: 15px;
+    padding: 5px 10px;
+    color: black;
+    outline: none;
+}
+
+.btn:hover{
+    color: white;
+    background-color: black;
+}
+    </style>
+    <script>
+        const textElement = document.getElementById('text')
+const optionButtonsElement = document.getElementById('option-buttons')
+
+let state = {}
+
+function startGame() {
+  state = {}
+  showTextNode(1)
+}
+
+function showTextNode(textNodeIndex) {
+  const textNode = textNodes.find(textNode => textNode.id === textNodeIndex)
+  textElement.innerText = textNode.text
+  while (optionButtonsElement.firstChild) {
+    optionButtonsElement.removeChild(optionButtonsElement.firstChild)
+  }
+
+  textNode.options.forEach(option => {
+    if (showOption(option)) {
+      const button = document.createElement('button')
+      button.innerText = option.text
+      button.classList.add('btn')
+      button.addEventListener('click', () => selectOption(option))
+      optionButtonsElement.appendChild(button)
+    }
+  })
+}
+
+function showOption(option) {
+  return option.requiredState == null || option.requiredState(state)
+}
+
+function selectOption(option) {
+  const nextTextNodeId = option.nextText
+  if (nextTextNodeId <= 0) {
+    return startGame()
+  }
+  state = Object.assign(state, option.setState)
+  showTextNode(nextTextNodeId)
+}
+
+const textNodes = [
+  {
+    id: 1,
+    text: '"| GOOD BYE |"',
+    options: [
+      {
+        text: 'Start',
+        nextText: 2
+      },
+      {
+        text:'Created by: Wayne',
+      },
+    ]
+  },
+  {
+    id: 2,
+    text: '"Hi Lara, ito na siguro yung tamang oras para sabihin sayo to, Lara gusto kita pwede ba akong manligaw"  after your confession Lara put a smile on her face and slightly drop a tear while looking at you then she said',
+    options: [
+      {
+        text: ' . . . ',
+        nextText: 3
+      },
+    ]
+  },
+  {
+    id: 3,
+    text: '"(//~///~//) Masaya ako na gusto mo ako pero sana maging mag kaibigan padin tayo pagkatapos kong sabihin to Noah im sorry pero hindi pa ako ready may truma ako hindi ko makakalimutan yun im sorry" after Lara said it she cry and walk away leave you there while your fiends was shock about what happend decided to',
+    options: [
+      {
+        text: ' left and just go home ',
+        nextText: 4
+      },
+      {
+        text: ' let them support you',
+        nextText: 5
+      },
+    ]
+  },
+  {
+    id: 4,
+    text: '"Thank you guys but i will go home for now" after that you left your friends and you walk the way home then start to cry',
+    options: [
+      {
+        text: ' . . . ',
+        nextText: 6
+      },
+    ]
+  },
+  {
+    id: 5,
+    text: ' "im sorry guys" after that you hug your friends and tells then what happend and they ask you to let go for now there is a right time for love and it is unexpected, then you all go out and just walk around the place',
+    options: [
+      {
+        text: ' continue ',
+        nextText: 6
+      },
+    ]
+  },
+  {
+    id: 6,
+    text: 'Chapter 1 - Dream',
+    options: [
+      {
+        text: ' Start ',
+        nextText: 7
+      },
+    ]
+  },
+  {
+    id: 7,
+    text: 'You wake up on your bed and thinking about of your dream and what is that mean"(aghh) my head hurts what is that dream? did i made a wrong decision to confess on Lara? why?" more and more problem coming to your mind then you sit on your bed',
+    options: [
+      {
+        text: ' look around the room ',
+        nextText: 8
+      },
+      {
+        text: ' sit and think ',
+        nextText: 9
+      },
+    ]
+  },
+     {
+    id: 8,
+    text: 'you stand up on your bed and look around on your room then you see your room is messy',
+    options: [
+      {
+        text: ' clean your room ',
+        nextText: 10
+      },
+      {
+        text: ' stay in bed ',
+        nextText: 9
+      },
+     ]
+    },
+      {
+    id: 9,
+    text: 'you continue to think about your dream and then you smell your stinky',
+    options: [
+      {
+        text: ' take a bath ',
+        nextText: 12
+      },
+    ]
+  },
+      {
+    id: 10,
+    text: 'after you look around the room you start to clean it after you finish cleaning you smell your self stinky',
+    options: [
+      {
+        text: ' take a bath ',
+        nextText: 12
+       },
+     ]
+   },
+    {
+    id: 12,
+    text: 'after a while you take a bath and prepare your self before going out',
+    options: [
+      {
+        text: ' eat ',
+        nextText: 13
+       },
+       {
+        text: ' go out ',
+        nextText: 14
+       },
+     ]
+   },
+   {
+    id: 13,
+    text: 'after you finish preparing your self  you decided to eat before you go out "Anak halika sumabay kana sakin kumain" said by your mom, "opo ma, andyan na po" you respond, "kamusta ka may problema ba?" your mom ask ',
+    options: [
+      {
+        text: ' opo (talk about it) ',
+        nextText: 15
+       },
+       {
+        text: ' wala po ma, okay lang po ako (start to eat) ',
+        nextText: 16
+       },
+     ]
+   },
+   {
+    id: 16,
+    text: 'after you finish eating you hug your mom and say "Ma, good bye mauuna na po ako", "mag iingat ka Anak, andito lang kami nang papa mo kung kailangan mo" said by your mom then you wave at her and you put a slime on your face',
+    options: [
+      {
+        text: ' Ride on a tricycle ',
+        nextText: 21
+       },
+       {
+        text: ' Ride on a jeep ',
+        nextText: 22
+       },
+     ]
+   },
+   {
+    id: 21,
+    text: 'You decided to ride a tricycle to the train station "Kuya dito nalang po sa gilid" the tricycle driver said "Ganon po ba?, Sige po, okay lang po ba kayo?" you respond',
+    options: [
+      {
+        text: ' Okay lang po, ako medyo pagod lang po ',
+        nextText: 23
+       },
+       {
+        text: ' Hindi po, hindi ko na po kaya ',
+        nextText: 24
+       },
+     ]
+   },
+   {
+    id: 22,
+    text: 'You decided to ride a jeep to the train station "Kuya dito nalang po sa gilid" the jeepney driver said "Ganon po ba?, Sige po, okay lang po ba kayo?" you respond',
+    options: [
+      {
+        text: ' Okay lang po, ako medyo pagod lang po ',
+        nextText: 23
+       },
+       {
+        text: ' Hindi po, hindi ko na po kaya ',
+        nextText: 24
+       },
+     ]
+   },
+   {
+    id: 23,
+    text: 'you seid "Okay lang po ako medyo pagod lang", then the driver respond "Mag iingat po kayo" after you give the fee you',
+    options: [
+      {
+        text: ' (give a smile) ',
+        nextText: 25
+       },
+       {
+        text: ' (walk to the pedestrian line) ',
+        nextText: 26
+       },
+     ]
+   },
+   {
+    id: 24,
+    text: 'you seid "Hindi po, hindi ko na po kaya", then the driver respond "Mag iingat po kayo" after you give the fee you',
+    options: [
+      {
+        text: ' (give a smile) ',
+        nextText: 25
+       },
+       {
+        text: ' (walk to the pedestrian line) ',
+        nextText: 26
+       },
+     ]
+   },
+   {
+    id: 25,
+    text: '"salamat po sa mag aalala" as you said you give the driver a smile and you walk up to the pedestrian line to across the street',
+    options: [
+      {
+        text: ' . . . ',
+        nextText: 27
+       },
+     ]
+   },
+   {
+    id: 26,
+    text: '"salamat po" as you said you walk to the ',
+    options: [
+      {
+        text: ' . . . ',
+        nextText: 27
+       },
+     ]
+   },
+   {
+    id: 27,
+    text: '(start to cry) "teka? eto na ba? hindi ko na alam yung gagawin ko lahat nang problemat kasalanan naka-dikit na sakin" as you said while looking at the pedestrian line you decided to say sorry to',
+    options: [
+       {
+        text: ' Mom ',
+        nextText: 28
+       },
+       {
+        text: ' Dad ',
+        nextText: 29
+       },
+       {
+        text: ' Brother/Sister ',
+        nextText: 30
+       },
+       {
+        text: ' Friends ',
+        nextText: 31
+       },
+     ]
+   },
+   {
+    id: 28,
+    text: '"(Calling Mom) "Hi Ma, mayasa ako dahil naging anak mo ako at masaya ako na ikaw ang nanay ko salamat sa lahat dahil ibinigay mo sakin ang lahat nang gusto ko kahit na hihirapan kana basta mapasaya mo lang ako ay okay na sayo, sorry ma naging pasaway ako na anak at minsan di sumusunod sayo mahal na mahal kita ma sorry" as you said your mom start to cry and said "Anak bakit mo gagawin to hindi ba gusto mo pa sya makita at makasama paano kaming pamilya mo? hindi ako papayag na gagawin mo to" you start to cry too then you hang-up the call',
+    options: [
+      {
+        text: ' Sorry Ma ',
+        nextText: 32
+       },
+     ]
+   },
+   {
+    id: 29,
+    text: '"(Calling Dad) "Hi Pa, mayasa ako dahil naging anak mo ako at masaya ako na ikaw ang tatay ko salamat sa lahat dahil ibinigay mo sakin ang lahat nang gusto ko kahit na hihirapan kana basta mapasaya mo lang ako ay okay na sayo, sorry pa naging pasaway ako na anak at minsan di sumusunod sayo mahal na mahal kita pa sorry" as you said your dad start to cry and said "Anak bakit mo gagawin to hindi ba gusto mo pa sya makita at makasama paano kaming pamilya mo? hindi ako papayag na gagawin mo to" you start to cry too then you hang-up the call',
+    options: [
+      {
+        text: ' Sorry pa ',
+        nextText: 32
+       },
+     ]
+   },
+   {
+    id: 30,
+    text: '"(Calling Brother/Sister) "Hi Kuya at ate, mayasa ako dahil naging kapatid nyo ako at masaya ako na naging kapatid ko  kayo salamat sa lahat dahil ibinigay nyo sakin ang lahat nang gusto ko kahit na hihirapan kayo basta mapasaya nyo lang ako ay okay na sainyo, sorry ate at kuya naging pasaway ako na kapatid at minsan di sumusunod sainyo mahal na mahal ko kayo sorry" as you said your Brother/Sister start to cry and said "Hoy wag kang ganyan asan ka pupuntahan ka namin nang ate mo! sumagot ka asan ka" you start to cry too then you hang-up the call',
+    options: [
+      {
+        text: ' Sorry ate at kuya ',
+        nextText: 32
+       },
+     ]
+   },
+   {
+    id: 31,
+    text: '"(Calling friends) "Hi mga kaibigan, mayasa ako dahil naging kaibigan nyo ako at masaya ako na naging kaibigan   ko kayo salamat sa lahat dahil ibinigay nyo sakin ang lahat nang gusto ko kahit na hihirapan kayo basta mapasaya nyo lang ako ay okay na sainyo, sorry mga kaibigan naging pasaway ako na kaibigan nyo at minsan di sumusunod sainyo mahal na mahal ko kayo sorry" as you said your friends start to cry and said "Hoy ano to dito nakakatawa wag kang ganyan, Asan ka pupuntahan kita, Masama yang gagawin mo wag mo itutuloy Hoy! sumagot ka samin" you start to cry too then you hang-up the call',
+    options: [
+      {
+        text: ' Sorry mga kaibigan ',
+        nextText: 32
+       },
+     ]
+   },
+   {
+    id: 32,
+    text: '"Sorry" then you start to walk across the street, someone shouted your name "Noah!!"',
+    options: [
+      {
+        text: ' (take a look) ',
+        nextText: 33
+       },
+     ]
+   },
+   {
+    id: 33,
+    text: 'then you are shock to see lara but she look behind because someone is taking to her, after that you heard a loud noise of a car',
+    options: [
+      {
+        text: ' (look to your side) ',
+        nextText: 34
+       },
+     ]
+   },
+   {
+    id: 34,
+    text: 'The time stop the only sound you heard is your name "NOAHH!!" shouted by lara and run to where you are then Lara start to cry while holding your hand then she call for help to get you to the hospital',
+    options: [
+      {
+        text: ' . . . ',
+        nextText: 35
+       },
+     ]
+   },
+   {
+    id: 35,
+    text: '"Noah, noah, gising kana, kamusta ka sorry bigla akong tinawag di kita na pansin na lumingon ka pala sakin sorry sana mapatawad mo ako" lara start to cry then you reach her hand to say "Wag ka mag-alala sakin kailangan ko lang mag pahinga " then for a while lara goes out to buy some food and drinks for you to eat and drink ',
+    options: [
+      {
+        text: ' mag-iingat ka ',
+        nextText: 36
+       },
+     ]
+   },
+   {
+    id: 36,
+    text: '" mag-iingat ka" as you said Lara wave and give a smile while heading out the room "see you later Noah"',
+    options: [
+      {
+        text: ' (take a rest) ',
+        nextText: 37
+       },
+     ]
+   },
+   {
+    id: 37,
+    text: 'After a few hours Lara came back "Hi Noah, pasensya sa pag-aantay medyo natagalan ako heto nayung binili ko kumakain ka nang madami wag mag papalipas nang gutong" as Lara said you respond "salamat Lara" then brings someone with her"Noah bago ko makalimutan ipapakilala ko pala sayo si Samantha gusto ko lang sabihin na naging part ka nang buhay ko"',
+    options: [
+      {
+        text: ' Ano yung gusto mong sabihin? ',
+        nextText: 38
+       },
+       {
+        text: ' May dapat ba akong malaman? ',
+        nextText: 39
+      },
+     ]
+   },
+   {
+    id: 39,
+    text: '"May dapat ba akong malaman?", Lara respond "Sorry Noah pero kami na ni Samantha" then you smile "Ganon ba, buti naman naka-pili kana masaya ako para sayo Lara"',
+    options: [
+      {
+        text: ' pwede ba ninyo ba muna akong iwan mag isa? ',
+        nextText: 40
+       },
+     ]
+   },
+   {
+    id: 38,
+    text: '"Ano yung gusto mong sabihin?", Lara respond "Sorry Noah pero kami na ni Samantha" then you smile "Ganon ba, buti naman naka-pili kana masaya ako para sayo Lara"',
+    options: [
+      {
+        text: ' pwede ba ninyo ba muna akong iwan mag isa? ',
+        nextText: 40
+       },
+     ]
+   },
+   {
+    id: 40,
+    text: '"pwede ba ninyo ba muna akong iwan mag isa?", Lara respond "oo naman kumain ka nang madamit wag mag papalipas nang gutom" then you smile "oo naman, (sila na?)"  i been waiting for too long for nothing and the promise is a mistake',
+    options: [
+      {
+        text: ' . . .  ',
+        nextText: 41
+       },
+     ]
+   },
+   {
+    id: 41,
+    text: 'Ending 2 - Love and Hate',
+    options: [
+      {
+        text: ' Continue ',
+        nextText: 42
+       },
+       {
+        text: ' Back ',
+        nextText:1
+       },
+     ]
+   },
+   {
+    id: 42,
+    text: 'Chapter 2 - Overthink',
+    options: [
+      {
+        text: ' Start ',
+        nextText: 43
+       },
+       {
+        text: ' Back ',
+        nextText:1
+       },
+     ]
+   },
+   {
+    id: 41,
+    text: 'Ending 2 - Love and Hate',
+    options: [
+      {
+        text: ' Continue ',
+        nextText: 42
+       },
+       {
+        text: ' Back ',
+        nextText:1
+       },
+     ]
+   },
+   {
+    id: 43,
+    text: '|" Few months goes by im discharge on the hospital, i feel nothing but cofused i cant take it i think i will focus on my studies for now "|',
+    options: [
+      {
+        text: ' . . . ',
+        nextText: 44
+       },
+     ]
+   },
+   {
+    id: 44,
+    text: '|" Do this things happend for a reason? what reason? and why "|',
+    options: [
+      {
+        text: ' . . . ',
+        nextText: 45
+       },
+     ]
+   },
+   {
+    id: 45,
+    text: 'You are having a bad time thinking about something you didnt expect to heard on Lara, Kayden and kalix came to your chair "Hey Noah di ma pinta mukha mo, may problema ka ba? hindi maganda may dalang problema sa school pag usapan natin yan" said by kalix',
+    options: [
+      {
+        text: ' tell them ',
+        nextText: 46
+       },
+       {
+        text: ' (Silent) . . . ',
+        nextText: 47
+       },
+     ]
+   },
+   {
+    id: 47,
+    text: '" . . . ", "Ano ka ba, kaibigan mo kami wag kang mahihiyang mag sabi" said by Kayden and Kalix agree on it',
+    options: [
+      {
+        text: ' Tell them ',
+        nextText: 46
+       },
+     ]
+   },
+   {
+    id: 46,
+    text: '|" After you tell your problem to them they think that you are joking around"|',
+    options: [
+      {
+        text: ' . . . ',
+        nextText: 48
+       },
+     ]
+   },
+   {
+    id: 48,
+    text: '"Hey Noah, Kung totoo yan bakit? teka kung ako sayo kalimutan mo muna sya o wag mo muna syang isipin mag focus ka muna sa pag aaral mo" said by Kalix',
+    options: [
+      {
+        text: ' Di ko alam kung kaya ko ',
+        nextText: 49
+       },
+       {
+        text: ' Pasensya na pero di ko kaya ',
+        nextText: 49
+       },
+     ]
+   },
+   {
+    id: 49,
+    text: '"Ano ka ba, Wag kang ganyan" (unexpected Kayden punch your face) "BAKIT BA INIISIP YUNG BABAE NA YUN?!?!, DIBA DAPAT TUMIGIL KANA, SATINGIN MO MATUTULONGAN KA NYA SA SITWASYON MO NGAYON!!"',
+    options: [
+      {
+        text: ' Shut the f*** up ',
+        nextText: 50
+       },
+       {
+        text: ' (leave the room) ',
+        nextText: 51
+       },
+     ]
+   },
+   {
+    id: 50,
+    text: '"SHUT THE F*** UP Kayden, Wag kang pake alam sa mga problema ko "',
+    options: [
+      {
+        text: ' (leave the room) ',
+        nextText: 51
+       },
+     ]
+   },
+   {
+    id: 51,
+    text: 'After that happend you leave the room and just questioning my self (Why do i even thinking about her? she is happy on someone else so i dont have to worry anymore)',
+    options: [
+      {
+        text: ' . . . ',
+        nextText: 52
+       },
+     ]
+   },
+   {
+    id: 52,
+    text: 'After the end of the class while you are heading outside the school Kayden and Kalix is waiting on the gate',
+    options: [
+      {
+        text: ' . . . ',
+        nextText: 53
+       },
+     ]
+   },
+   {
+    id: 53,
+    text: '"Noah, sorry kanina mali ko nasaktan ka hindi ko sinasadya yung nang yari mapapatawad mo ba ako" said by Kayden',
+    options: [
+      {
+        text: ' ( Continue walking ) ',
+        nextText: 54
+       },
+        {
+        text: ' (Forgive) ',
+        nextText: 55
+       },
+     ]
+   },
+   {
+    id: 54,
+    text: 'you just continue walking and pretend that you dont see them',
+    options: [
+      {
+        text: ' . . . ',
+        nextText: 56
+       },
+     ]
+   },
+   {
+    id: 56,
+    text: 'After a few hours while watching some TV show (Phone rings)',
+    options: [
+      {
+        text: ' (Answer) ',
+        nextText: 57
+       },
+       {
+        text: ' (Cancel)',
+        nextText: 58
+       },
+     ]
+   },
+   {
+    id: 57,
+    text: 'You answer the phone "Sino po sila", "Noah nabalitan ko yung nang yayari sayo mag asikaso kana at umuwi dito sa bicol"',
+    options: [
+      {
+        text: ' . . . ',
+        nextText: 59
+       },
+     ]
+   },
+   {
+    id: 59,
+    text: ' Ending 4 - It will be okay for afar',
+    options: [
+      {
+        text: ' Continue ',
+        nextText: 62
+       },
+       {
+        text: ' Back ',
+        nextText: 1
+       },
+     ]
+   },
+   {
+    id: 58,
+    text: 'you cancel the phone call (phone ring again)',
+    options: [
+      {
+        text: ' (Answer) ',
+        nextText: 57
+       },
+       {
+        text: ' (think)',
+        nextText: 61
+       },
+     ]
+   },
+   {
+    id: 61,
+    text: 'you think about it for a while (phone rings again)',
+    options: [
+      {
+        text: ' (Answer) ',
+        nextText: 57
+       },
+     ]
+   },
+   {
+    id: 62,
+    text: 'Chapter 3 - Take Me To Somewhere Else',
+    options: [
+      {
+        text: ' Start ',
+        nextText: 63
+       },
+     ]
+   },
+   {
+    id: 63,
+    text: 'After you keep all your things time to let go some of bad memories here',
+    options: [
+      {
+        text: ' . . . ',
+        nextText: 65
+       },
+     ]
+   },
+   {
+    id: 65,
+    text: 'after a few hours why sleeping at the car ( (1)New Message )',
+    options: [
+      {
+        text: ' Check it ',
+        nextText: 66
+       },
+       {
+        text: ' ( Continue sleeping ) ',
+        nextText: 67
+       },
+     ]
+   },
+   {
+    id: 66,
+    text: '"Lara? (Noah, asan ka? umalis ka daw sabi ni tita bakit hindi ka nag sabi sakin?)" ',
+    options: [
+      {
+        text: ' block ',
+        nextText: 68
+       },
+       {
+        text: ' ignore ',
+        nextText: 70
+       },
+     ]
+   },
+   {
+    id: 68,
+    text: 'i wish i have a right decision on this ( Block ) you put you phone on the table',
+    options: [
+      {
+        text: ' . . . ',
+        nextText: 71
+       },
+     ]
+   },
+   {
+    id: 70,
+    text: ' i wish i have a right decision on this ( ignore ) you put yout phone on the table' ,
+    options: [
+      {
+        text: ' . . . ',
+        nextText: 71
+       },
+     ]
+   },
+   {
+    id: 71,
+    text: 'After a few hours you reach bicol and - To Be Continue',
+    options: [
+      {
+        text: ' Back ',
+        nextText: 65
+       },
+     ]
+   },
+   {
+    id: 67,
+    text: '(You just continue sleeping)',
+    options: [
+      {
+        text: ' . . . ',
+        nextText: 71
+       },
+     ]
+   },
+   {
+    id: 63,
+    text: 'After you keep all your things time to let go some of bad memories here',
+    options: [
+      {
+        text: ' . . . ',
+        nextText: 65
+       },
+     ]
+   },
+   {
+    id: 55,
+    text: '"Pasensya nadin kanina kung nasigawan kita", "Oks lang yan ako bahala libre ko" said by Kayden',
+    options: [
+      {
+        text: ' . . . ',
+        nextText: 64
+       },
+     ]
+   },
+   {
+    id: 64,
+    text: 'in just a distance you see someone (Wait is that Lara who is that with her?)',
+    options: [
+      {
+        text: ' Continue walking ',
+        nextText: 54
+       },
+     ]
+   },
+   {
+    id: 14,
+    text: 'before you go out you see your mom in the kitchen eating "Anak, aalis kana di ka pa kumakain halika samahan mo ako bago ka umalis" said by your mom ',
+    options: [
+      {
+        text: ' Sige po ma, papunta na po (walks to the kitchen) ',
+        nextText: 13
+       },
+       {
+        text: ' Pasensya na ma pero mauuna na po ako ',
+        nextText: 18
+       },
+     ]
+   },
+   {
+    id: 18,
+    text: '"pasensya na ma pero mauuna na po ako" as you said, your mom stand up and give you a hug "Mag iingat ka Anak"',
+    options: [
+      {
+        text: 'Good bye ma, mahal po kita ',
+        nextText: 199999,
+       },
+     ]
+   },
+   {
+    id: 199999,
+    text: 'Good bye ma, mahal po kita" as you said, "mahal din kita Anak mag iingat ka sa iyong pag alis" your mom respond ',
+    options: [
+       {
+        text: ' Ride on a tricycle ',
+        nextText: 21
+       },
+       {
+        text: ' Ride on a jeep ',
+        nextText: 22
+       },
+     ]
+   },
+   {
+    id: 15,
+    text: 'You start telling to your mom about your problem and the dream you have (your mom stand up and sit next to you and give you a hug) you start to cry and you give you mom a hug then you decided not to leave the house',
+    options: [
+      {
+        text: ' mahal kita ma ',
+        nextText: 19
+       },
+     ]
+   },
+   {
+    id: 19,
+    text: '"mahal kita ma" as you said, "mahal din kita Anak" your mom respond and offer you to go out with her and just enjoy the day',
+    options: [
+      {
+        text: ' . . . ',
+        nextText: 20
+       },
+     ]
+   },
+   {
+    id: 20,
+    text: 'Ending 1 - "Dont say good bye just enjoy the day"',
+    options: [
+      {
+        text: ' Back ',
+        nextText: 1
+       },
+       
+     ]
+   },
+]
+startGame()
+</script>
+</body>
+</html>
