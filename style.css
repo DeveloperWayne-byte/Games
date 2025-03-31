@@ -1,0 +1,286 @@
+@media (max-width: 1300px){}
+
+@media (max-width: 1120px){}
+
+@media (max-width: 992px){
+ .home_page{
+    min-height: auto;
+ }
+ .about_page{
+    min-height: auto;
+ }
+ .game_page{
+    min-height: auto;
+ }
+ .gallery_page{
+    min-height: auto;
+ }
+ .contact_page{
+    min-height: auto;
+ }
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} 
+
+body{
+background-image: url('bg.gif');
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-size: cover;
+min-width: auto;
+   }
+
+.container {
+  max-width: 1050px;
+  width: 90%;
+  margin: auto;
+}
+
+.navbar {
+  width: 100%;
+  box-shadow: 0 1px 4px rgb(146 161 176 / 15%);
+  background-color: black;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 62px;
+}
+
+.navbar .menu-items {
+  display: flex;
+  color: white;
+}
+
+.navbar .nav-container li {
+  list-style: none;
+}
+
+.navbar .nav-container a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  font-size: 50px;
+  padding: 0.7rem;
+}
+
+.navbar .nav-container a:hover{
+    font-weight: bolder;
+}
+
+.nav-container {
+  display: block;
+  position: relative;
+  height: 60px;
+}
+
+.nav-container .checkbox {
+  position: absolute;
+  display: block;
+  height: 32px;
+  width: 32px;
+  top: 20px;
+  left: 20px;
+  z-index: 5;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.nav-container .hamburger-lines {
+  display: block;
+  height: 26px;
+  width: 32px;
+  position: absolute;
+  top: 17px;
+  left: 20px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.nav-container .hamburger-lines .line {
+  display: block;
+  height: 4px;
+  width: 100%;
+  border-radius: 10px;
+  background: white;
+}
+
+.nav-container .hamburger-lines .line1 {
+  transform-origin: 0% 0%;
+  transition: transform 0.4s ease-in-out;
+}
+
+.nav-container .hamburger-lines .line2 {
+  transition: transform 0.2s ease-in-out;
+}
+
+.nav-container .hamburger-lines .line3 {
+  transform-origin: 0% 100%;
+  transition: transform 0.4s ease-in-out;
+}
+
+.navbar .menu-items {
+  background-color: black;
+  opacity: 1;
+  padding-top: 120px;
+  min-height: auto;
+  width: 100%;
+  transform: translate(-150%);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.5s ease-in-out;
+  text-align: center;
+}
+
+.navbar .menu-items li {
+  margin-bottom: 1.2rem;
+  font-size: 50px;
+  font-weight: 500;
+}
+
+.logo {
+  position: absolute;
+  top: 11px;
+  left: 55px;
+  width: 500px;
+  color: white;
+}
+
+.nav-container input[type="checkbox"]:checked ~ .menu-items {
+  transform: translateX(0);
+}
+
+.nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line1 {
+  transform: rotate(45deg);
+}
+
+.nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line2 {
+  transform: scaleY(0);
+}
+
+.nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line3 {
+  transform: rotate(-45deg);
+}
+
+.nav-container input[type="checkbox"]:checked ~ .logo{
+  display: none;
+}
+
+.home_page {
+    color: white;
+    padding-top: 125px;
+    text-align: center;
+    font-size: 75px;
+}
+
+.home_page p{
+    color: white;
+    font-size: 40px;
+}
+
+.home_page span{
+    color: darkviolet;
+}
+
+.home_page img{
+    width: 600px;
+    border-radius: 20px;
+    border: 2px solid black;
+    margin: 20px;
+    box-shadow: 0 5px 30px darkviolet;
+}
+
+.about_page{
+    color: white;
+    padding-top: 125px;
+    text-align: center;
+    font-size: 75px;
+}
+
+.about_page p{
+    color: white;
+   font-size: 40px;
+   text-align: left;
+}
+
+.about_page span{
+    color: darkviolet;
+}
+
+.gallery_page{
+    color: white;
+    padding-top: 125px;
+    text-align: center;
+    font-size: 75px;
+}
+
+.gallery_page p{
+    color: white;
+    font-size: 40px;
+}
+
+.gallery_page span{
+    color: darkviolet;
+}
+
+img{
+    width: 50%;
+}
+
+.game_page{
+    color: white;
+    padding-top: 125px;
+    text-align: center;
+    font-size: 75px;
+}
+
+.game_page p{
+    color: white;
+    font-size: 40px;
+}
+
+.game_page span{
+    color: darkviolet;
+}
+
+.game_page a{
+    color: white;
+    text-decoration: none;
+}
+
+.contact_page{
+    color: white;
+    padding-top: 125px;
+    text-align: center;
+    font-size: 75px;
+}
+
+.contact_page p{
+    color: white;
+    font-size: 40px;
+}
+
+.contact_page span{
+    color: darkviolet;
+}
+
+
+footer{
+    margin-top: 100px;
+    background-color: black;
+    color: white;
+    padding: 10px 16px;
+    width: 100%;
+    font-size: 30px;
+    text-align: center;
+    bottom: 0;
+}

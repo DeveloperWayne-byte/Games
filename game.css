@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url("bg.gif");
+    background-size: cover;
+}
+
+
+.game-box {
+    display: grid;
+    grid-gap: 1px;
+    border: 5px solid rgba(0, 0, 0, 0.5);
+    box-shadow: 0px  0px 50px black;
+    background-color: darkgrey;
+    overflow: hidden;
+}
+
+.game-box div, .next-box div {
+    border-radius: 15%;
+    transition: transform 0.25s linear;
+}
+
+.game-box div.remove {
+    transform: rotateY(90deg);
+}
+
+.game-box div.piece {
+    border-left: 3px solid rgba(255, 255, 255, .3);
+    border-top: 3px solid rgba(255, 255, 255, .3);
+    border-right: 3px solid rgba(0, 0, 0, .3);
+    border-bottom: 3px solid rgba(0, 0, 0, .3);
+}
+
+.game-over, .paused {
+    position: absolute;
+    display: flex;
+    place-items: center;
+    width: 50vw;
+    height: 30vh;
+    background-color: rgba(0, 0, 0, .7);
+    pointer-events: none;
+}
+
+.game-over span, .paused span {
+    display: block;
+    font-size: 5rem;
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+.score-box{
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    width: 15vw;
+    height: 5vw;
+    background-color: rgba(255,255,255, .75);
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    border: 2px solid black;
+}
+
+.play{
+    position: absolute;
+    top: 8rem;
+    left: 2rem;
+    width: 15vw;
+    height: 15vw;
+    background-color: rgba(255,255,255, .75);
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: 2px solid black;
+}
+
+.home{
+  position: absolute;
+  top: 43rem;
+  left: 2rem;
+  width: 4vw;
+  height: 3vw;
+  background-color: rgba(255,255,255, .75);
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  font-size: 2rem;
+  font-weight: bold;
+  border: 2px solid black;
+}
+
+.home a{
+  text-decoration: none;
+  color: black;
+}
+
+.next-box {
+    background-color: rgba(255,255,255, .0);
+    display: grid;
+    gap: 1px;
+}
+
+.next-text {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+    background-color: rgba(255,255,255, .75);
+    padding: 10px;
+    border: 2px solid black;
+}
+
+.next-text span {
+    display: block;
+    padding-bottom: 15px;
+}
